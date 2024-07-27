@@ -4,8 +4,8 @@ using PowerLinesAI;
 var sampleData = new ResultModel.ModelInput()
 {
     Division = @"E0",
-    HomeTeam = @"Aston Villa",
-    AwayTeam = @"QPR",
+    HomeTeam = @"Newcastle",
+    AwayTeam = @"Sunderland",
 };
 
 //Load model and predict output

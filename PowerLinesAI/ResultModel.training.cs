@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.ML.Data;
-using Microsoft.ML.Trainers.LightGbm;
 using Microsoft.ML.Trainers;
 using Microsoft.ML.Transforms;
 using Microsoft.ML;
@@ -15,7 +14,7 @@ namespace PowerLinesAI
 {
     public partial class ResultModel
     {
-        public const string RetrainFilePath =  @"C:\Repos\power-lines-ai\PowerLinesAI\PowerLinesAI\Results.csv";
+        public const string RetrainFilePath =  @"C:\Repos\power-lines-ai\PowerLinesAI\Results.csv";
         public const char RetrainSeparatorChar = ',';
         public const bool RetrainHasHeader =  true;
 
@@ -92,14 +91,12 @@ namespace PowerLinesAI
         public static IEstimator<ITransformer> BuildPipeline(MLContext mlContext)
         {
             // Data process configuration with pipeline data transformations
-            var pipeline = mlContext.Transforms.Categorical.OneHotEncoding(new []{new InputOutputColumnPair(@"division", @"division"),new InputOutputColumnPair(@"halfTimeResult", @"halfTimeResult")}, outputKind: OneHotEncodingEstimator.OutputKind.Indicator)      
+            var pipeline = mlContext.Transforms.Categorical.OneHotEncoding(new []{new InputOutputColumnPair(@"division", @"division"),new InputOutputColumnPair(@"homeTeam", @"homeTeam"),new InputOutputColumnPair(@"awayTeam", @"awayTeam"),new InputOutputColumnPair(@"halfTimeResult", @"halfTimeResult")}, outputKind: OneHotEncodingEstimator.OutputKind.Indicator)      
                                     .Append(mlContext.Transforms.ReplaceMissingValues(new []{new InputOutputColumnPair(@"fullTimeHomeGoals", @"fullTimeHomeGoals"),new InputOutputColumnPair(@"fullTimeAwayGoals", @"fullTimeAwayGoals"),new InputOutputColumnPair(@"halfTimeHomeGoals", @"halfTimeHomeGoals"),new InputOutputColumnPair(@"halfTimeAwayGoals", @"halfTimeAwayGoals"),new InputOutputColumnPair(@"homeOddsAverage", @"homeOddsAverage"),new InputOutputColumnPair(@"drawOddsAverage", @"drawOddsAverage"),new InputOutputColumnPair(@"awayOddsAverage", @"awayOddsAverage")}))      
-                                    .Append(mlContext.Transforms.Text.FeaturizeText(inputColumnName:@"homeTeam",outputColumnName:@"homeTeam"))      
-                                    .Append(mlContext.Transforms.Text.FeaturizeText(inputColumnName:@"awayTeam",outputColumnName:@"awayTeam"))      
                                     .Append(mlContext.Transforms.Conversion.ConvertType(@"date", @"date"))      
-                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"division",@"halfTimeResult",@"fullTimeHomeGoals",@"fullTimeAwayGoals",@"halfTimeHomeGoals",@"halfTimeAwayGoals",@"homeOddsAverage",@"drawOddsAverage",@"awayOddsAverage",@"homeTeam",@"awayTeam",@"date"}))      
+                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"division",@"homeTeam",@"awayTeam",@"halfTimeResult",@"fullTimeHomeGoals",@"fullTimeAwayGoals",@"halfTimeHomeGoals",@"halfTimeAwayGoals",@"homeOddsAverage",@"drawOddsAverage",@"awayOddsAverage",@"date"}))      
                                     .Append(mlContext.Transforms.Conversion.MapValueToKey(outputColumnName:@"fullTimeResult",inputColumnName:@"fullTimeResult",addKeyValueAnnotationsAsText:false))      
-                                    .Append(mlContext.MulticlassClassification.Trainers.LightGbm(new LightGbmMulticlassTrainer.Options(){NumberOfLeaves=4,NumberOfIterations=4038,MinimumExampleCountPerLeaf=20,LearningRate=0.999999776672986,LabelColumnName=@"fullTimeResult",FeatureColumnName=@"Features",ExampleWeightColumnName=null,Booster=new GradientBooster.Options(){SubsampleFraction=0.830977049299901,FeatureFraction=0.993647095123888,L1Regularization=2.00448953094004E-10,L2Regularization=0.0684875065499915},MaximumBinCountPerFeature=274}))      
+                                    .Append(mlContext.MulticlassClassification.Trainers.LbfgsMaximumEntropy(new LbfgsMaximumEntropyMulticlassTrainer.Options(){L1Regularization=1F,L2Regularization=1F,LabelColumnName=@"fullTimeResult",FeatureColumnName=@"Features"}))      
                                     .Append(mlContext.Transforms.Conversion.MapKeyToValue(outputColumnName:@"PredictedLabel",inputColumnName:@"PredictedLabel"));
 
             return pipeline;

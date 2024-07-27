@@ -3,7 +3,7 @@
   "DataSource": {
     "Type": "TabularFile",
     "Version": 1,
-    "FilePath": "C:\\Repos\\power-lines-ai\\PowerLinesAI\\PowerLinesAI\\Results.csv",
+    "FilePath": "C:\\Repos\\power-lines-ai\\PowerLinesAI\\Results.csv",
     "Delimiter": ",",
     "DecimalMarker": ".",
     "HasHeader": true,
@@ -36,7 +36,7 @@
         "ColumnName": "homeTeam",
         "ColumnPurpose": "Feature",
         "ColumnDataFormat": "String",
-        "IsCategorical": false,
+        "IsCategorical": true,
         "Type": "Column",
         "Version": 4
       },
@@ -44,7 +44,7 @@
         "ColumnName": "awayTeam",
         "ColumnPurpose": "Feature",
         "ColumnDataFormat": "String",
-        "IsCategorical": false,
+        "IsCategorical": true,
         "Type": "Column",
         "Version": 4
       },
@@ -141,18 +141,22 @@
       {
         "Version": 1,
         "Type": "Trial",
-        "TrainerName": "LightGbmMulti",
-        "Score": 0.99995617735903453,
-        "RuntimeInSeconds": 131.006,
+        "TrainerName": "LbfgsMaximumEntropyMulti",
+        "Score": 0.33333333333333331,
+        "RuntimeInSeconds": 2.617,
         "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e2 * e3 * e4 * e5 * e6 * e9 * e14",
+          "_SCHEMA_": "e0 * e1 * e2 * e3 * e4 * e6 * e9",
           "e0": {
             "OutputColumnNames": [
               "division",
+              "homeTeam",
+              "awayTeam",
               "halfTimeResult"
             ],
             "InputColumnNames": [
               "division",
+              "homeTeam",
+              "awayTeam",
               "halfTimeResult"
             ]
           },
@@ -176,19 +180,7 @@
               "awayOddsAverage"
             ]
           },
-          "e14": {
-            "OutputColumnName": "PredictedLabel",
-            "InputColumnName": "PredictedLabel"
-          },
           "e2": {
-            "InputColumnName": "homeTeam",
-            "OutputColumnName": "homeTeam"
-          },
-          "e3": {
-            "InputColumnName": "awayTeam",
-            "OutputColumnName": "awayTeam"
-          },
-          "e4": {
             "OutputColumnNames": [
               "date"
             ],
@@ -196,9 +188,11 @@
               "date"
             ]
           },
-          "e5": {
+          "e3": {
             "InputColumnNames": [
               "division",
+              "homeTeam",
+              "awayTeam",
               "halfTimeResult",
               "fullTimeHomeGoals",
               "fullTimeAwayGoals",
@@ -207,68 +201,40 @@
               "homeOddsAverage",
               "drawOddsAverage",
               "awayOddsAverage",
-              "homeTeam",
-              "awayTeam",
               "date"
             ],
             "OutputColumnName": "Features"
           },
-          "e6": {
+          "e4": {
             "OutputColumnName": "fullTimeResult",
             "InputColumnName": "fullTimeResult",
             "AddKeyValueAnnotationsAsText": false
           },
+          "e6": {
+            "L1Regularization": 1.0,
+            "L2Regularization": 1.0,
+            "LabelColumnName": "fullTimeResult",
+            "FeatureColumnName": "Features"
+          },
           "e9": {
-            "NumberOfLeaves": 4,
-            "MinimumExampleCountPerLeaf": 20,
-            "LearningRate": 0.99999977667298645,
-            "NumberOfTrees": 4038,
-            "SubsampleFraction": 0.83097704929990091,
-            "MaximumBinCountPerFeature": 274,
-            "FeatureFraction": 0.99364709512388782,
-            "L1Regularization": 2.0044895309400385E-10,
-            "L2Regularization": 0.068487506549991473,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
+            "OutputColumnName": "PredictedLabel",
+            "InputColumnName": "PredictedLabel"
           },
-          "e10": {
+          "e5": {
             "L1Regularization": 1.0,
             "L2Regularization": 1.0,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e11": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 1.0,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e12": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 0.1,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e13": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 0.1,
             "LabelColumnName": "fullTimeResult",
             "FeatureColumnName": "Features"
           },
           "e7": {
-            "NumberOfLeaves": 4,
-            "MinimumExampleCountPerLeaf": 20,
-            "NumberOfTrees": 4,
-            "MaximumBinCountPerFeature": 255,
-            "FeatureFraction": 1.0,
-            "LearningRate": 0.099999999999999978,
+            "L1Regularization": 1.0,
+            "L2Regularization": 0.1,
             "LabelColumnName": "fullTimeResult",
             "FeatureColumnName": "Features"
           },
           "e8": {
-            "NumberOfTrees": 4,
-            "NumberOfLeaves": 4,
-            "FeatureFraction": 1.0,
+            "L1Regularization": 1.0,
+            "L2Regularization": 0.1,
             "LabelColumnName": "fullTimeResult",
             "FeatureColumnName": "Features"
           }
@@ -277,18 +243,22 @@
       {
         "Version": 1,
         "Type": "Trial",
-        "TrainerName": "FastForestOva",
-        "Score": 0.99992864507743429,
-        "RuntimeInSeconds": 15.526,
+        "TrainerName": "LbfgsMaximumEntropyMulti",
+        "Score": 0.33333333333333331,
+        "RuntimeInSeconds": 1.961,
         "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e2 * e3 * e4 * e5 * e6 * e8 * e14",
+          "_SCHEMA_": "e0 * e1 * e2 * e3 * e4 * e6 * e9",
           "e0": {
             "OutputColumnNames": [
               "division",
+              "homeTeam",
+              "awayTeam",
               "halfTimeResult"
             ],
             "InputColumnNames": [
               "division",
+              "homeTeam",
+              "awayTeam",
               "halfTimeResult"
             ]
           },
@@ -312,19 +282,7 @@
               "awayOddsAverage"
             ]
           },
-          "e14": {
-            "OutputColumnName": "PredictedLabel",
-            "InputColumnName": "PredictedLabel"
-          },
           "e2": {
-            "InputColumnName": "homeTeam",
-            "OutputColumnName": "homeTeam"
-          },
-          "e3": {
-            "InputColumnName": "awayTeam",
-            "OutputColumnName": "awayTeam"
-          },
-          "e4": {
             "OutputColumnNames": [
               "date"
             ],
@@ -332,9 +290,11 @@
               "date"
             ]
           },
-          "e5": {
+          "e3": {
             "InputColumnNames": [
               "division",
+              "homeTeam",
+              "awayTeam",
               "halfTimeResult",
               "fullTimeHomeGoals",
               "fullTimeAwayGoals",
@@ -343,68 +303,40 @@
               "homeOddsAverage",
               "drawOddsAverage",
               "awayOddsAverage",
-              "homeTeam",
-              "awayTeam",
               "date"
             ],
             "OutputColumnName": "Features"
           },
-          "e6": {
+          "e4": {
             "OutputColumnName": "fullTimeResult",
             "InputColumnName": "fullTimeResult",
             "AddKeyValueAnnotationsAsText": false
           },
-          "e8": {
-            "NumberOfTrees": 4,
-            "NumberOfLeaves": 4,
-            "FeatureFraction": 1.0,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e10": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 1.0,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e11": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 1.0,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e12": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 0.1,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e13": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 0.1,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e7": {
-            "NumberOfLeaves": 4,
-            "MinimumExampleCountPerLeaf": 20,
-            "NumberOfTrees": 4,
-            "MaximumBinCountPerFeature": 255,
-            "FeatureFraction": 1.0,
-            "LearningRate": 0.099999999999999978,
+          "e6": {
+            "L1Regularization": 44.7958832,
+            "L2Regularization": 2.60735464,
             "LabelColumnName": "fullTimeResult",
             "FeatureColumnName": "Features"
           },
           "e9": {
-            "NumberOfLeaves": 4,
-            "MinimumExampleCountPerLeaf": 20,
-            "LearningRate": 1.0,
-            "NumberOfTrees": 4,
-            "SubsampleFraction": 1.0,
-            "MaximumBinCountPerFeature": 255,
-            "FeatureFraction": 1.0,
-            "L1Regularization": 2E-10,
+            "OutputColumnName": "PredictedLabel",
+            "InputColumnName": "PredictedLabel"
+          },
+          "e5": {
+            "L1Regularization": 1.0,
             "L2Regularization": 1.0,
+            "LabelColumnName": "fullTimeResult",
+            "FeatureColumnName": "Features"
+          },
+          "e7": {
+            "L1Regularization": 1.0,
+            "L2Regularization": 0.1,
+            "LabelColumnName": "fullTimeResult",
+            "FeatureColumnName": "Features"
+          },
+          "e8": {
+            "L1Regularization": 1.0,
+            "L2Regularization": 0.1,
             "LabelColumnName": "fullTimeResult",
             "FeatureColumnName": "Features"
           }
@@ -413,18 +345,22 @@
       {
         "Version": 1,
         "Type": "Trial",
-        "TrainerName": "FastForestOva",
-        "Score": 0.99992864507743429,
-        "RuntimeInSeconds": 26.052,
+        "TrainerName": "LbfgsMaximumEntropyMulti",
+        "Score": 0.33333333333333331,
+        "RuntimeInSeconds": 2.045,
         "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e2 * e3 * e4 * e5 * e6 * e8 * e14",
+          "_SCHEMA_": "e0 * e1 * e2 * e3 * e4 * e6 * e9",
           "e0": {
             "OutputColumnNames": [
               "division",
+              "homeTeam",
+              "awayTeam",
               "halfTimeResult"
             ],
             "InputColumnNames": [
               "division",
+              "homeTeam",
+              "awayTeam",
               "halfTimeResult"
             ]
           },
@@ -448,19 +384,7 @@
               "awayOddsAverage"
             ]
           },
-          "e14": {
-            "OutputColumnName": "PredictedLabel",
-            "InputColumnName": "PredictedLabel"
-          },
           "e2": {
-            "InputColumnName": "homeTeam",
-            "OutputColumnName": "homeTeam"
-          },
-          "e3": {
-            "InputColumnName": "awayTeam",
-            "OutputColumnName": "awayTeam"
-          },
-          "e4": {
             "OutputColumnNames": [
               "date"
             ],
@@ -468,9 +392,11 @@
               "date"
             ]
           },
-          "e5": {
+          "e3": {
             "InputColumnNames": [
               "division",
+              "homeTeam",
+              "awayTeam",
               "halfTimeResult",
               "fullTimeHomeGoals",
               "fullTimeAwayGoals",
@@ -479,68 +405,40 @@
               "homeOddsAverage",
               "drawOddsAverage",
               "awayOddsAverage",
-              "homeTeam",
-              "awayTeam",
               "date"
             ],
             "OutputColumnName": "Features"
           },
-          "e6": {
+          "e4": {
             "OutputColumnName": "fullTimeResult",
             "InputColumnName": "fullTimeResult",
             "AddKeyValueAnnotationsAsText": false
           },
-          "e8": {
-            "NumberOfTrees": 4,
-            "NumberOfLeaves": 5,
-            "FeatureFraction": 1.0,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e10": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 1.0,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e11": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 1.0,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e12": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 0.1,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e13": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 0.1,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e7": {
-            "NumberOfLeaves": 4,
-            "MinimumExampleCountPerLeaf": 20,
-            "NumberOfTrees": 4,
-            "MaximumBinCountPerFeature": 255,
-            "FeatureFraction": 1.0,
-            "LearningRate": 0.099999999999999978,
+          "e6": {
+            "L1Regularization": 0.03125,
+            "L2Regularization": 0.3835305,
             "LabelColumnName": "fullTimeResult",
             "FeatureColumnName": "Features"
           },
           "e9": {
-            "NumberOfLeaves": 4,
-            "MinimumExampleCountPerLeaf": 20,
-            "LearningRate": 1.0,
-            "NumberOfTrees": 4,
-            "SubsampleFraction": 1.0,
-            "MaximumBinCountPerFeature": 255,
-            "FeatureFraction": 1.0,
-            "L1Regularization": 2E-10,
+            "OutputColumnName": "PredictedLabel",
+            "InputColumnName": "PredictedLabel"
+          },
+          "e5": {
+            "L1Regularization": 1.0,
             "L2Regularization": 1.0,
+            "LabelColumnName": "fullTimeResult",
+            "FeatureColumnName": "Features"
+          },
+          "e7": {
+            "L1Regularization": 1.0,
+            "L2Regularization": 0.1,
+            "LabelColumnName": "fullTimeResult",
+            "FeatureColumnName": "Features"
+          },
+          "e8": {
+            "L1Regularization": 1.0,
+            "L2Regularization": 0.1,
             "LabelColumnName": "fullTimeResult",
             "FeatureColumnName": "Features"
           }
@@ -549,18 +447,22 @@
       {
         "Version": 1,
         "Type": "Trial",
-        "TrainerName": "FastTreeOva",
-        "Score": 0.99992469068163325,
-        "RuntimeInSeconds": 22.219,
+        "TrainerName": "LbfgsLogisticRegressionOva",
+        "Score": 0.33333333333333331,
+        "RuntimeInSeconds": 3.596,
         "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e2 * e3 * e4 * e5 * e6 * e7 * e14",
+          "_SCHEMA_": "e0 * e1 * e2 * e3 * e4 * e5 * e9",
           "e0": {
             "OutputColumnNames": [
               "division",
+              "homeTeam",
+              "awayTeam",
               "halfTimeResult"
             ],
             "InputColumnNames": [
               "division",
+              "homeTeam",
+              "awayTeam",
               "halfTimeResult"
             ]
           },
@@ -584,19 +486,7 @@
               "awayOddsAverage"
             ]
           },
-          "e14": {
-            "OutputColumnName": "PredictedLabel",
-            "InputColumnName": "PredictedLabel"
-          },
           "e2": {
-            "InputColumnName": "homeTeam",
-            "OutputColumnName": "homeTeam"
-          },
-          "e3": {
-            "InputColumnName": "awayTeam",
-            "OutputColumnName": "awayTeam"
-          },
-          "e4": {
             "OutputColumnNames": [
               "date"
             ],
@@ -604,9 +494,11 @@
               "date"
             ]
           },
-          "e5": {
+          "e3": {
             "InputColumnNames": [
               "division",
+              "homeTeam",
+              "awayTeam",
               "halfTimeResult",
               "fullTimeHomeGoals",
               "fullTimeAwayGoals",
@@ -615,68 +507,40 @@
               "homeOddsAverage",
               "drawOddsAverage",
               "awayOddsAverage",
-              "homeTeam",
-              "awayTeam",
               "date"
             ],
             "OutputColumnName": "Features"
           },
-          "e6": {
+          "e4": {
             "OutputColumnName": "fullTimeResult",
             "InputColumnName": "fullTimeResult",
             "AddKeyValueAnnotationsAsText": false
           },
+          "e5": {
+            "L1Regularization": 1.0,
+            "L2Regularization": 1.0,
+            "LabelColumnName": "fullTimeResult",
+            "FeatureColumnName": "Features"
+          },
+          "e9": {
+            "OutputColumnName": "PredictedLabel",
+            "InputColumnName": "PredictedLabel"
+          },
+          "e6": {
+            "L1Regularization": 1.0,
+            "L2Regularization": 1.0,
+            "LabelColumnName": "fullTimeResult",
+            "FeatureColumnName": "Features"
+          },
           "e7": {
-            "NumberOfLeaves": 87,
-            "MinimumExampleCountPerLeaf": 21,
-            "NumberOfTrees": 4,
-            "MaximumBinCountPerFeature": 194,
-            "FeatureFraction": 0.99999999,
-            "LearningRate": 0.027911713214273482,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e10": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 1.0,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e11": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 1.0,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e12": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 0.1,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e13": {
             "L1Regularization": 1.0,
             "L2Regularization": 0.1,
             "LabelColumnName": "fullTimeResult",
             "FeatureColumnName": "Features"
           },
           "e8": {
-            "NumberOfTrees": 4,
-            "NumberOfLeaves": 4,
-            "FeatureFraction": 1.0,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e9": {
-            "NumberOfLeaves": 4,
-            "MinimumExampleCountPerLeaf": 20,
-            "LearningRate": 1.0,
-            "NumberOfTrees": 4,
-            "SubsampleFraction": 1.0,
-            "MaximumBinCountPerFeature": 255,
-            "FeatureFraction": 1.0,
-            "L1Regularization": 2E-10,
-            "L2Regularization": 1.0,
+            "L1Regularization": 1.0,
+            "L2Regularization": 0.1,
             "LabelColumnName": "fullTimeResult",
             "FeatureColumnName": "Features"
           }
@@ -685,18 +549,22 @@
       {
         "Version": 1,
         "Type": "Trial",
-        "TrainerName": "FastForestOva",
-        "Score": 0.99990220683716358,
-        "RuntimeInSeconds": 38.345,
+        "TrainerName": "LbfgsLogisticRegressionOva",
+        "Score": 0.33333333333333331,
+        "RuntimeInSeconds": 4.074,
         "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e2 * e3 * e4 * e5 * e6 * e8 * e14",
+          "_SCHEMA_": "e0 * e1 * e2 * e3 * e4 * e5 * e9",
           "e0": {
             "OutputColumnNames": [
               "division",
+              "homeTeam",
+              "awayTeam",
               "halfTimeResult"
             ],
             "InputColumnNames": [
               "division",
+              "homeTeam",
+              "awayTeam",
               "halfTimeResult"
             ]
           },
@@ -720,19 +588,7 @@
               "awayOddsAverage"
             ]
           },
-          "e14": {
-            "OutputColumnName": "PredictedLabel",
-            "InputColumnName": "PredictedLabel"
-          },
           "e2": {
-            "InputColumnName": "homeTeam",
-            "OutputColumnName": "homeTeam"
-          },
-          "e3": {
-            "InputColumnName": "awayTeam",
-            "OutputColumnName": "awayTeam"
-          },
-          "e4": {
             "OutputColumnNames": [
               "date"
             ],
@@ -740,9 +596,11 @@
               "date"
             ]
           },
-          "e5": {
+          "e3": {
             "InputColumnNames": [
               "division",
+              "homeTeam",
+              "awayTeam",
               "halfTimeResult",
               "fullTimeHomeGoals",
               "fullTimeAwayGoals",
@@ -751,68 +609,40 @@
               "homeOddsAverage",
               "drawOddsAverage",
               "awayOddsAverage",
-              "homeTeam",
-              "awayTeam",
               "date"
             ],
             "OutputColumnName": "Features"
           },
-          "e6": {
+          "e4": {
             "OutputColumnName": "fullTimeResult",
             "InputColumnName": "fullTimeResult",
             "AddKeyValueAnnotationsAsText": false
           },
-          "e8": {
-            "NumberOfTrees": 16,
-            "NumberOfLeaves": 4,
-            "FeatureFraction": 1.0,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e10": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 1.0,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e11": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 1.0,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e12": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 0.1,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e13": {
-            "L1Regularization": 1.0,
-            "L2Regularization": 0.1,
-            "LabelColumnName": "fullTimeResult",
-            "FeatureColumnName": "Features"
-          },
-          "e7": {
-            "NumberOfLeaves": 4,
-            "MinimumExampleCountPerLeaf": 20,
-            "NumberOfTrees": 4,
-            "MaximumBinCountPerFeature": 255,
-            "FeatureFraction": 1.0,
-            "LearningRate": 0.099999999999999978,
+          "e5": {
+            "L1Regularization": 44.7958832,
+            "L2Regularization": 2.60735464,
             "LabelColumnName": "fullTimeResult",
             "FeatureColumnName": "Features"
           },
           "e9": {
-            "NumberOfLeaves": 4,
-            "MinimumExampleCountPerLeaf": 20,
-            "LearningRate": 1.0,
-            "NumberOfTrees": 4,
-            "SubsampleFraction": 1.0,
-            "MaximumBinCountPerFeature": 255,
-            "FeatureFraction": 1.0,
-            "L1Regularization": 2E-10,
+            "OutputColumnName": "PredictedLabel",
+            "InputColumnName": "PredictedLabel"
+          },
+          "e6": {
+            "L1Regularization": 1.0,
             "L2Regularization": 1.0,
+            "LabelColumnName": "fullTimeResult",
+            "FeatureColumnName": "Features"
+          },
+          "e7": {
+            "L1Regularization": 1.0,
+            "L2Regularization": 0.1,
+            "LabelColumnName": "fullTimeResult",
+            "FeatureColumnName": "Features"
+          },
+          "e8": {
+            "L1Regularization": 1.0,
+            "L2Regularization": 0.1,
             "LabelColumnName": "fullTimeResult",
             "FeatureColumnName": "Features"
           }
@@ -822,23 +652,18 @@
     "Estimators": {
       "e0": "OneHotEncoding",
       "e1": "ReplaceMissingValues",
-      "e2": "FeaturizeText",
-      "e3": "FeaturizeText",
-      "e4": "ConvertType",
-      "e5": "Concatenate",
-      "e6": "MapValueToKey",
-      "e7": "FastTreeOva",
-      "e8": "FastForestOva",
-      "e9": "LightGbmMulti",
-      "e10": "LbfgsLogisticRegressionOva",
-      "e11": "LbfgsMaximumEntropyMulti",
-      "e12": "SdcaMaximumEntropyMulti",
-      "e13": "SdcaLogisticRegressionOva",
-      "e14": "MapKeyToValue"
+      "e2": "ConvertType",
+      "e3": "Concatenate",
+      "e4": "MapValueToKey",
+      "e5": "LbfgsLogisticRegressionOva",
+      "e6": "LbfgsMaximumEntropyMulti",
+      "e7": "SdcaMaximumEntropyMulti",
+      "e8": "SdcaLogisticRegressionOva",
+      "e9": "MapKeyToValue"
     },
-    "Schema": "e0 * e1 * e2 * e3 * e4 * e5 * e6 * (e7 + e8 + e9 + e10 + e11 + e12 + e13) * e14",
+    "Schema": "e0 * e1 * e2 * e3 * e4 * (e5 + e6 + e7 + e8) * e9",
     "MetricName": "MacroAccuracy",
-    "ModelFilePath": "C:\\Repos\\power-lines-ai\\PowerLinesAI\\PowerLinesAI\\ResultModel.mlnet"
+    "ModelFilePath": "C:\\Repos\\power-lines-ai\\PowerLinesAI\\ResultModel.mlnet"
   },
   "Type": "TrainingConfig",
   "Version": 4,
@@ -846,7 +671,12 @@
     "Version": 1,
     "Type": "ClassificationTrainingOption",
     "TrainingTime": 600,
+    "OptimizeMetric": "MacroAccuracy",
     "LabelColumn": "fullTimeResult",
+    "AvailableTrainers": [
+      "SDCA",
+      "LBFGS"
+    ],
     "ValidationOption": {
       "Version": 0,
       "Type": "TrainValidateSplitValidationOption",
